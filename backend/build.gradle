@@ -16,7 +16,6 @@ version '1.0.0'
 
 apply plugin: 'kotlin'
 
-sourceCompatibility = 1.8
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
