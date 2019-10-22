@@ -31,6 +31,7 @@ dependencies {
     compile(Deps.Ktor.core)
     compile(Deps.Ktor.netty)
     compile(Deps.Ktor.gson)
+    compile(Deps.logback)
 
     testCompile(group = "junit", name = "junit", version = "4.12")
 }

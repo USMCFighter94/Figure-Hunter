@@ -6,4 +6,6 @@ object Deps {
         const val netty = "io.ktor:ktor-server-netty:${Versions.ktor}"
         const val gson = "io.ktor:ktor-gson:${Versions.ktor}"
     }
+
+    const val logback = "ch.qos.logback:logback-classic:${Versions.logback}"
 }

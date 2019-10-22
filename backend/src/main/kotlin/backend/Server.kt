@@ -5,6 +5,7 @@ import backend.figure.figure
 import backend.home.home
 import io.ktor.application.Application
 import io.ktor.application.install
+import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
 import io.ktor.routing.routing
@@ -25,6 +26,7 @@ fun main() {
 }
 
 fun Application.main() {
+    install(CallLogging)
     install(ContentNegotiation) {
         gson {
             setPrettyPrinting()
