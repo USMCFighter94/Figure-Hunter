@@ -1,4 +1,5 @@
 object Deps {
+    const val exposed = "org.jetbrains.exposed:exposed:${Versions.exposed}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
     object Ktor {
@@ -8,4 +9,6 @@ object Deps {
     }
 
     const val logback = "ch.qos.logback:logback-classic:${Versions.logback}"
+
+    const val postgresql = "org.postgresql:postgresql:${Versions.postgresql}"
 }

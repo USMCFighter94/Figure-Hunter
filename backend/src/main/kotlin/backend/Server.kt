@@ -11,6 +11,7 @@ import io.ktor.gson.gson
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import org.jetbrains.exposed.sql.Database
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -32,6 +33,13 @@ fun Application.main() {
             setPrettyPrinting()
         }
     }
+
+    Database.connect(
+        System.getenv("JDBC_DATABASE_URL"),
+        driver = "org.postgresql.Driver",
+        user = System.getenv("DB_USER"),
+        password = System.getenv("DB_PASSWORD")
+    )
 
     routing {
         home()

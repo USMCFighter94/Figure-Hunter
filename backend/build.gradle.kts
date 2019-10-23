@@ -12,6 +12,7 @@ repositories {
     mavenCentral()
     maven { setUrl("http://dl.bintray.com/kotlin/ktor") }
     maven { setUrl("https://dl.bintray.com/kotlin/kotlinx") }
+    maven { setUrl("https://dl.bintray.com/kotlin/exposed") }
 }
 
 java {
@@ -27,11 +28,13 @@ application {
 }
 
 dependencies {
+    compile(Deps.exposed)
     compile(Deps.kotlin)
     compile(Deps.Ktor.core)
     compile(Deps.Ktor.netty)
     compile(Deps.Ktor.gson)
     compile(Deps.logback)
+    compile(Deps.postgresql)
 
     testCompile(group = "junit", name = "junit", version = "4.12")
 }
