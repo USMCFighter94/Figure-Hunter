@@ -5,7 +5,7 @@ import org.jetbrains.exposed.dao.EntityID
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 
- class FigureEntry(id: EntityID<Int>) : IntEntity(id) {
+class FigureEntry(id: EntityID<Int>) : IntEntity(id) {
     private val name by Figures.name
     private val number by Figures.number
     private val series by Figures.series

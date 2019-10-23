@@ -2,6 +2,9 @@ package backend.figure
 
 import backend.Repository
 import backend.figure.db.FigureEntry
+import backend.figure.db.Figures
+import backend.figure.db.toDomain
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object FigureRepository : Repository<Figure> {
@@ -19,7 +22,7 @@ object FigureRepository : Repository<Figure> {
             1969
         )
 
-    override fun getAll() = transaction { FigureEntry.all() }.map { it.toDomain() }
+    override fun getAll() = transaction { Figures.selectAll().map { it.toDomain() } }
 
     override fun remove(id: String) {
     }
