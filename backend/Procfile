@@ -1,1 +1,1 @@
-web: java -jar build/libs/Figure Hunter-1.0.0.jar
+web: ./build/install/Figure\ Hunter/bin/Figure\ Hunter
