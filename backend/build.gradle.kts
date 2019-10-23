@@ -35,3 +35,7 @@ dependencies {
 
     testCompile(group = "junit", name = "junit", version = "4.12")
 }
+
+tasks.register("stage") {
+    dependsOn("installDist")
+}
