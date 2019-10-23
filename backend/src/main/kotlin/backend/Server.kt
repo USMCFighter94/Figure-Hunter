@@ -37,8 +37,8 @@ fun Application.main() {
     Database.connect(
         System.getenv("JDBC_DATABASE_URL"),
         driver = "org.postgresql.Driver",
-        user = System.getenv("DB_USER"),
-        password = System.getenv("DB_PASSWORD")
+        user = System.getenv("JDBC_DATABASE_USERNAME"),
+        password = System.getenv("JDBC_DATABASE_PASSWORD")
     )
 
     routing {
