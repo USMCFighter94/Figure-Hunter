@@ -19,6 +19,4 @@ dependencies {
     implementation(Deps.Rx.kotlin)
 
     testImplementation(Deps.Test.kotlinTest)
-    testImplementation(Deps.Test.mockk)
-    testImplementation(Deps.Test.mockWebServer)
 }
