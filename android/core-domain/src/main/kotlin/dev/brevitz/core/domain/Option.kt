@@ -15,6 +15,8 @@ sealed class Option<out A : Any> {
         is None -> this
         is Some -> mapper(value)
     }
+
+    inline fun filter(predicate: (A) -> Boolean): Option<A> = flatMap { if (predicate(it)) Some(it) else None }
 }
 
 fun <A : Any> A?.toOption(): Option<A> = if (this == null) Option.None else Option.Some(this)

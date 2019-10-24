@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.brevitz.core.data.di.provideCoreComponent
 import dev.brevitz.core.domain.RemoteData
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class HomeFragment private constructor() : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
     @Inject
     lateinit var viewModel: HomeViewModel
 
@@ -35,6 +36,7 @@ class HomeFragment private constructor() : Fragment(R.layout.fragment_home) {
             layoutManager = LinearLayoutManager(context)
             adapter = controller.adapter
             isNestedScrollingEnabled = true
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         }
 
         viewModel.start()

@@ -15,7 +15,7 @@ class MemoryReactiveStore<K : Any, V : Any>(
 ) : ReactiveStore<K, V> {
 
     private val itemsSubject = PublishSubject.create<Option<Set<V>>>().toSerialized()
-    private val itemRelays = ConcurrentHashMap<K, Subject<Option<V>>>()
+    private val itemSubjects = ConcurrentHashMap<K, Subject<Option<V>>>()
 
     override fun store(item: V) {
         val key = keyForItem(item)
@@ -24,7 +24,6 @@ class MemoryReactiveStore<K : Any, V : Any>(
         getOrCreatePublisher(key).onNext(item.toOption())
         itemsSubject.onNext(getAllItems())
     }
-
 
     override fun get(key: K): Observable<Option<V>> =
         Observable.defer {
@@ -50,17 +49,19 @@ class MemoryReactiveStore<K : Any, V : Any>(
         updateExistingPublishers()
     }
 
-    private fun getAllItems(): Option<Set<V>> = cache.values.toSet().toOption()
+    private fun getAllItems(): Option<Set<V>> = cache.values.toSet()
+        .toOption()
+        .filter { it.isNotEmpty() }
 
     @Synchronized
     private fun getOrCreatePublisher(key: K): Subject<Option<V>> =
-        itemRelays.getOrPut(key) {
+        itemSubjects.getOrPut(key) {
             PublishSubject.create<Option<V>>().toSerialized()
         }
 
     @Synchronized
     private fun updateExistingPublishers() {
-        val keys = itemRelays.keys().toList().toSet()
+        val keys = itemSubjects.keys().toList().toSet()
         keys.forEach {
             val item = cache[it].toOption()
             updateItemPublisher(it, item)
@@ -68,7 +69,7 @@ class MemoryReactiveStore<K : Any, V : Any>(
     }
 
     private fun updateItemPublisher(key: K, item: Option<V>) {
-        when (val publisher = itemRelays[key].toOption()) {
+        when (val publisher = itemSubjects[key].toOption()) {
             is Option.Some -> publisher.value.onNext(item)
             is Option.None -> {
             }
