@@ -1,5 +1,5 @@
 plugins {
-    id(Plugins.app)
+    id(Plugins.library)
     kotlin(Plugins.Kotlin.android)
     kotlin(Plugins.Kotlin.extensions)
     kotlin(Plugins.Kotlin.kapt)
@@ -9,24 +9,18 @@ android {
     compileSdkVersion(Sdk.compile)
 
     defaultConfig {
-        applicationId = "dev.brevitz.figurehunter"
         minSdkVersion(Sdk.min)
         targetSdkVersion(Sdk.target)
-        versionCode = 1
-        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         getByName("debug") {
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
             isDebuggable = true
             isMinifyEnabled = false
         }
 
         getByName("release") {
-            isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
@@ -50,26 +44,16 @@ android {
 }
 
 dependencies {
-    implementation(project(Deps.Project.coreData))
     implementation(project(Deps.Project.coreDomain))
 
-    implementation(Deps.appCompat)
-    implementation(Deps.cardView)
-    implementation(Deps.constraintLayout)
-    implementation(Deps.coreKtx)
     kapt(Deps.Dagger.compiler)
     implementation(Deps.Dagger.core)
-    implementation(Deps.epoxy)
-    implementation(Deps.Glide.core)
-    kapt(Deps.Glide.compiler)
     implementation(Deps.kotlin)
-    implementation(Deps.lifecycle)
-    implementation(Deps.material)
-    implementation(Deps.navigation)
-    implementation(Deps.navigationUi)
-    implementation(Deps.recyclerView)
+    implementation(Deps.moshi)
+    implementation(Deps.Retrofit.core)
+    implementation(Deps.Retrofit.converter)
+    implementation(Deps.Retrofit.rxAdapter)
     implementation(Deps.Rx.android)
-    implementation(Deps.Rx.binding)
     implementation(Deps.Rx.java)
     implementation(Deps.Rx.kotlin)
     implementation(Deps.timber)

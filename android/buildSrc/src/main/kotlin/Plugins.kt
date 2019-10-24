@@ -4,21 +4,10 @@ object Plugins {
     const val library = "com.android.library"
 
     object Kotlin {
-        const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val android = "android"
+        const val core = "jvm"
         const val extensions = "android.extensions"
+        const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val kapt = "kapt"
     }
-
-    object Apollo {
-        const val gradle = "com.apollographql.apollo:apollo-gradle-plugin:${Versions.apollo}"
-        const val core = "com.apollographql.android"
-    }
-
-    object License {
-        const val gradle = "com.cookpad.android.licensetools:license-tools-plugin:${Versions.license}"
-        const val core = "com.cookpad.android.licensetools"
-    }
-
-    const val gradleVersion = "com.github.ben-manes.versions"
 }

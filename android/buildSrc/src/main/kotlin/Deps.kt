@@ -9,6 +9,11 @@ object Deps {
     const val navigationUi = "android.arch.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
 
+    object Dagger {
+        const val core = "com.google.dagger:dagger:${Versions.dagger}"
+        const val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    }
+
     const val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
 
     object Glide {
@@ -17,6 +22,19 @@ object Deps {
     }
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+
+    const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+
+    object Project {
+        const val coreData = ":core-data"
+        const val coreDomain = ":core-domain"
+    }
+
+    object Retrofit {
+        const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+        const val converter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+        const val rxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
+    }
 
     object Rx {
         const val android = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
