@@ -25,6 +25,8 @@ object Deps {
 
     const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
 
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+
     object Project {
         const val coreData = ":core-data"
         const val coreDomain = ":core-domain"

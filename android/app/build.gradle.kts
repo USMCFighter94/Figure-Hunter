@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id(Plugins.app)
     kotlin(Plugins.Kotlin.android)
@@ -47,6 +49,10 @@ android {
         }
         getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
     }
+}
+
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 dependencies {

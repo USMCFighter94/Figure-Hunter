@@ -4,6 +4,8 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -33,11 +35,19 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun okHttp(): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+        .build()
+
+    @Provides
+    @Singleton
     fun retrofit(
+        okHttpClient: OkHttpClient,
         @BaseUrl baseUrl: String,
         converterFactory: Converter.Factory,
         callAdapterFactory: CallAdapter.Factory
     ): Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
         .baseUrl(baseUrl)
         .addConverterFactory(converterFactory)
         .addCallAdapterFactory(callAdapterFactory)

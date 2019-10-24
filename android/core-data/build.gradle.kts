@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id(Plugins.library)
     kotlin(Plugins.Kotlin.android)
@@ -43,6 +45,10 @@ android {
     }
 }
 
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
 dependencies {
     implementation(project(Deps.Project.coreDomain))
 
@@ -50,6 +56,7 @@ dependencies {
     implementation(Deps.Dagger.core)
     implementation(Deps.kotlin)
     implementation(Deps.moshi)
+    implementation(Deps.loggingInterceptor)
     implementation(Deps.Retrofit.core)
     implementation(Deps.Retrofit.converter)
     implementation(Deps.Retrofit.rxAdapter)
