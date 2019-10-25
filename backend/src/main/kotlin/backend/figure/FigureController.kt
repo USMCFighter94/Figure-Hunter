@@ -9,19 +9,19 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 
-private const val FIGURE = "${API_V1}/figure"
+private const val FIGURE_ROUTE = "$API_V1/figure"
 
 fun Route.figure(repository: Repository<Figure>) {
-    get("$FIGURE/all") {
+    get("$FIGURE_ROUTE/all") {
         call.respond(repository.getAll())
     }
 
-    get("$FIGURE/{id}") {
+    get("$FIGURE_ROUTE/{id}") {
         val id = call.parameters["id"] ?: throw IllegalArgumentException("Parameter \"id\" not found")
         call.respond(repository.get(id))
     }
 
-    post(FIGURE) {
+    post(FIGURE_ROUTE) {
         val request = call.receive(Figure::class)
         call.respond(repository.add(request))
     }

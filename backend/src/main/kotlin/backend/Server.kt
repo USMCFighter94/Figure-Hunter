@@ -1,12 +1,22 @@
 package backend
 
+import backend.auth.JwtConfig
+import backend.auth.UserAuthenticationRepository
+import backend.auth.login.login
+import backend.auth.register.register
 import backend.figure.FigureRepository
 import backend.figure.figure
 import backend.home.home
+import backend.user.UserRepository
+import backend.user.user
 import io.ktor.application.Application
 import io.ktor.application.install
+import io.ktor.auth.Authentication
+import io.ktor.auth.Principal
+import io.ktor.auth.jwt.jwt
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
+import io.ktor.features.DefaultHeaders
 import io.ktor.gson.gson
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -27,10 +37,24 @@ fun main() {
 }
 
 fun Application.main() {
+    val authenticationRepository = UserAuthenticationRepository()
+
     install(CallLogging)
     install(ContentNegotiation) {
         gson {
             setPrettyPrinting()
+        }
+    }
+    install(DefaultHeaders)
+    install(Authentication) {
+        jwt {
+            verifier(JwtConfig.verifier)
+            realm = "ktor.io"
+            validate {
+                it.payload.getClaim("id").asInt()?.let {
+                    authenticationRepository.find(it) as Principal?
+                }
+            }
         }
     }
 
@@ -44,5 +68,8 @@ fun Application.main() {
     routing {
         home()
         figure(FigureRepository)
+        user(UserRepository)
+        login(authenticationRepository)
+        register(authenticationRepository)
     }
 }

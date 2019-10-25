@@ -30,6 +30,7 @@ application {
 dependencies {
     compile(Deps.exposed)
     compile(Deps.kotlin)
+    compile(Deps.Ktor.auth)
     compile(Deps.Ktor.core)
     compile(Deps.Ktor.netty)
     compile(Deps.Ktor.gson)
