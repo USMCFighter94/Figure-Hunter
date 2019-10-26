@@ -1,4 +1,5 @@
 object Deps {
+    const val bcrypt = "org.mindrot:jbcrypt:${Versions.bcrypt}"
     const val exposed = "org.jetbrains.exposed:exposed:${Versions.exposed}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 

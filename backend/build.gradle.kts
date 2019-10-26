@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-group  = "dev.brevitz"
-version  = "1.0.0"
+group = "dev.brevitz"
+version = "1.0.0"
 
 plugins {
     application
@@ -28,6 +28,7 @@ application {
 }
 
 dependencies {
+    compile(Deps.bcrypt)
     compile(Deps.exposed)
     compile(Deps.kotlin)
     compile(Deps.Ktor.auth)
