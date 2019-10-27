@@ -6,8 +6,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import dev.brevitz.core.data.di.provideCoreComponent
-import dev.brevitz.core.domain.RemoteData
+import dev.brevitz.figurehunter.core.data.di.provideCoreComponent
+import dev.brevitz.figurehunter.core.domain.RemoteData
 import dev.brevitz.figurehunter.R
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -58,9 +58,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onPause() {
         super.onPause()
         viewModel.stop()
-    }
-
-    companion object {
-        fun newInstance() = HomeFragment()
     }
 }

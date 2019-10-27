@@ -16,7 +16,6 @@ tasks.withType<KotlinCompile>().all {
 dependencies {
     implementation(Deps.kotlin)
     implementation(Deps.Rx.java)
-    implementation(Deps.Rx.kotlin)
 
     testImplementation(Deps.Test.kotlinTest)
 }

@@ -28,8 +28,11 @@ object Deps {
     const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
     object Project {
+        const val authenticationUi = ":authentication-ui"
+        const val coreUi = ":core-ui"
         const val coreData = ":core-data"
         const val coreDomain = ":core-domain"
+        const val strings = ":strings"
     }
 
     object Retrofit {
