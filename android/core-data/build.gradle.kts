@@ -50,7 +50,7 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    implementation(project(Deps.Project.coreDomain))
+    implementation(project(Deps.Project.Core.domain))
 
     kapt(Deps.Dagger.compiler)
     implementation(Deps.Dagger.core)

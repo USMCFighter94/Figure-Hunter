@@ -4,6 +4,7 @@ plugins {
     id(Plugins.library)
     kotlin(Plugins.Kotlin.android)
     kotlin(Plugins.Kotlin.extensions)
+    kotlin(Plugins.Kotlin.kapt)
 }
 
 android {
@@ -49,11 +50,21 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    implementation(Deps.appCompat)
+    implementation(project(Deps.Project.Authentication.domain))
+    api(project(Deps.Project.Core.data))
+
+    kapt(Deps.Dagger.compiler)
+    implementation(Deps.Dagger.core)
     implementation(Deps.kotlin)
-    implementation(Deps.material)
+    implementation(Deps.moshi)
+    implementation(Deps.loggingInterceptor)
+    implementation(Deps.Retrofit.core)
+    implementation(Deps.Retrofit.converter)
+    implementation(Deps.Retrofit.rxAdapter)
+    implementation(Deps.Rx.android)
     implementation(Deps.Rx.java)
-    implementation(Deps.Rx.binding)
+    implementation(Deps.Rx.kotlin)
+    implementation(Deps.timber)
 
     testImplementation(Deps.Test.kotlinTest)
     testImplementation(Deps.Test.mockk)

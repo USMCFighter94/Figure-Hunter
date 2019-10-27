@@ -4,7 +4,8 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class])
+@Component(modules = [CoreModule::class, NetworkModule::class])
 interface CoreComponent : DaggerComponent {
     fun serviceCreator(): ServiceCreator
+    fun componentManager(): ComponentManager
 }

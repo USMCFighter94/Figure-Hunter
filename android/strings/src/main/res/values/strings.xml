@@ -6,8 +6,13 @@
     <string name="password">Password</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="submit">Submit</string>'
+    <string name="submit">Submit</string>
 
     <string name="new_here">New Here? Register</string>
     <string name="already_have_account">Already have an account? Log in</string>
+
+    <!-- Login Validation Error Messages -->
+    <string name="invalid_login_email">Please enter a username</string>
+    <string name="invalid_login_password">Passwords must contain 8 or more characters, a number, and at least one each of a lowercase, uppercase, and special character</string>
+
 </resources>
