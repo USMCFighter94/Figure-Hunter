@@ -14,8 +14,8 @@ class FigureRepository(
     }
 
     override fun get(id: String) = localDataSource.get(id.toInt())
-        ?: dataSource.get(id.toInt())!!
-            .also { localDataSource.save(it) }
+        ?: dataSource.get(id.toInt())
+            ?.also { localDataSource.save(it) }
 
     override fun getAll() = dataSource.getAll()
 

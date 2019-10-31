@@ -8,7 +8,7 @@ object UserRepository : Repository<User> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun get(id: String): User {
+    override fun get(id: String): User? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

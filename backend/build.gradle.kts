@@ -16,5 +16,6 @@ allprojects {
 }
 
 tasks.register("stage") {
-    dependsOn("installDist")
+    dependsOn("build", "clean")
+    tasks.findByName("build")?.mustRunAfter(tasks.findByName("clean"))
 }
