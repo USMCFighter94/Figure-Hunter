@@ -13,4 +13,8 @@ object Deps {
     const val logback = "ch.qos.logback:logback-classic:${Versions.logback}"
 
     const val postgresql = "org.postgresql:postgresql:${Versions.postgresql}"
+
+    object Test {
+        const val kotlinTest = "io.kotlintest:kotlintest-runner-junit5:${Versions.kotlinTest}"
+    }
 }

@@ -6,6 +6,8 @@ import dev.brevitz.figurehunter.auth.data.login.login
 import dev.brevitz.figurehunter.auth.data.register.register
 import dev.brevitz.figurehunter.core.LOG
 import dev.brevitz.figurehunter.figure.data.FigureRepository
+import dev.brevitz.figurehunter.figure.data.db.FigureDataSource
+import dev.brevitz.figurehunter.figure.data.db.FigureLocalDataSource
 import dev.brevitz.figurehunter.figure.data.figure
 import dev.brevitz.figurehunter.home.home
 import dev.brevitz.figurehunter.user.data.UserRepository
@@ -54,16 +56,22 @@ fun Application.main() {
         }
     }
 
-    Database.connect(
+    val cache = Database.connect("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;", driver = "org.h2.Driver")
+
+    val figureLocalDataSource = FigureLocalDataSource(cache)
+
+    val db = Database.connect(
         System.getenv("JDBC_DATABASE_URL"),
         driver = "org.postgresql.Driver",
         user = System.getenv("JDBC_DATABASE_USERNAME"),
         password = System.getenv("JDBC_DATABASE_PASSWORD")
     )
 
+    val figureDataSource = FigureDataSource(db)
+
     routing {
         home()
-        figure(FigureRepository)
+        figure(FigureRepository(figureLocalDataSource, figureDataSource))
         user(UserRepository)
         login(authenticationRepository)
         register(authenticationRepository)

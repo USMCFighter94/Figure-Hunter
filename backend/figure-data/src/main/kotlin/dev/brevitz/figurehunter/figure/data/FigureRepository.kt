@@ -1,29 +1,23 @@
 package dev.brevitz.figurehunter.figure.data
 
 import dev.brevitz.figurehunter.core.Repository
-import dev.brevitz.figurehunter.figure.data.db.FigureEntry
-import dev.brevitz.figurehunter.figure.data.db.Figures
-import dev.brevitz.figurehunter.figure.data.db.toDomain
+import dev.brevitz.figurehunter.core.storage.DataSource
+import dev.brevitz.figurehunter.core.storage.LocalDataSource
 import dev.brevitz.figurehunter.figure.domain.Figure
-import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.transaction
 
-object FigureRepository : Repository<Figure> {
+class FigureRepository(
+    private val localDataSource: LocalDataSource<Figure>,
+    private val dataSource: DataSource<Figure>
+) : Repository<Figure> {
     override fun add(newItem: Figure): Figure {
         return newItem
     }
 
-    override fun get(id: String) = transaction { FigureEntry.findById(id.toInt()) }
-        ?.toDomain()
-        ?: Figure(
-            0,
-            "",
-            0,
-            "",
-            1969
-        )
+    override fun get(id: String) = localDataSource.get(id.toInt())
+        ?: dataSource.get(id.toInt())!!
+            .also { localDataSource.save(it) }
 
-    override fun getAll() = transaction { Figures.selectAll().map { it.toDomain() } }
+    override fun getAll() = dataSource.getAll()
 
     override fun remove(id: String) {
     }

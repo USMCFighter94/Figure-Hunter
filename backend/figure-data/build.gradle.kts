@@ -12,6 +12,10 @@ tasks.withType<KotlinCompile>().all {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     compile(project(Project.core))
     compile(project(Project.Figure.domain))
@@ -23,5 +27,5 @@ dependencies {
     compile(Deps.logback)
     compile(Deps.postgresql)
 
-    testCompile(group = "junit", name = "junit", version = "4.12")
+    testCompile(Deps.Test.kotlinTest)
 }
