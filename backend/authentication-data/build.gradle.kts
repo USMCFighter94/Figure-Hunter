@@ -19,6 +19,7 @@ tasks.withType<Test> {
 dependencies {
     compile(project(Project.Authentication.domain))
     compile(project(Project.core))
+    compile(project(Project.User.data))
     compile(project(Project.User.domain))
 
     compile(Deps.bcrypt)

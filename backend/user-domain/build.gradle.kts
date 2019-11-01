@@ -15,4 +15,5 @@ tasks.withType<KotlinCompile>().all {
 dependencies {
     compile(project(Project.Figure.domain))
     compile(Deps.kotlin)
+    compile(Deps.Ktor.auth)
 }

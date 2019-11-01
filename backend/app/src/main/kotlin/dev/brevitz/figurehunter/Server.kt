@@ -48,9 +48,9 @@ fun Application.main() {
         jwt {
             verifier(JwtConfig.verifier)
             realm = "ktor.io"
-            validate {
-                it.payload.getClaim("id").asInt()?.let {
-                    authenticationRepository.find(it) as Principal?
+            validate { call ->
+                call.payload.getClaim("id").asInt()?.let {
+                    authenticationRepository.find(it)
                 }
             }
         }

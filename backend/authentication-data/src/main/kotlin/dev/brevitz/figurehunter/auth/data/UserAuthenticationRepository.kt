@@ -1,12 +1,12 @@
 package dev.brevitz.figurehunter.auth.data
 
-import dev.brevitz.figurehunter.auth.data.db.UserEntry
-import dev.brevitz.figurehunter.auth.data.db.Users
 import dev.brevitz.figurehunter.auth.domain.AuthenticationRepository
 import dev.brevitz.figurehunter.auth.domain.login.UserCredentials
 import dev.brevitz.figurehunter.auth.domain.register.RegistrationCredentials
 import dev.brevitz.figurehunter.auth.domain.register.RegistrationResult
 import dev.brevitz.figurehunter.core.LOG
+import dev.brevitz.figurehunter.user.data.db.UserEntry
+import dev.brevitz.figurehunter.user.data.db.Users
 import dev.brevitz.figurehunter.user.domain.User
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.mindrot.jbcrypt.BCrypt

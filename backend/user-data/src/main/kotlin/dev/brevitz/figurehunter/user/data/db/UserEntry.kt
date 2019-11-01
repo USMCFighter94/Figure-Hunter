@@ -1,6 +1,5 @@
-package dev.brevitz.figurehunter.auth.data.db
+package dev.brevitz.figurehunter.user.data.db
 
-import dev.brevitz.figurehunter.user.domain.FigureCollection
 import dev.brevitz.figurehunter.user.domain.User
 import org.jetbrains.exposed.dao.EntityID
 import org.jetbrains.exposed.dao.IntEntity
@@ -12,7 +11,7 @@ class UserEntry(id: EntityID<Int>) : IntEntity(id) {
     var userName by Users.userName
     var password by Users.password
 
-    fun toDomain() = User(id.value, firstName, lastName, userName, FigureCollection(emptyList()))
+    fun toDomain() = User(id.value, firstName, lastName, userName)
 
     companion object : IntEntityClass<UserEntry>(Users)
 }
