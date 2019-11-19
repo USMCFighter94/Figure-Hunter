@@ -56,6 +56,7 @@ dependencies {
     implementation(project(Deps.Project.strings))
 
     implementation(Deps.appCompat)
+    implementation(Deps.coreKtx)
     kapt(Deps.Dagger.compiler)
     implementation(Deps.Dagger.core)
     implementation(Deps.epoxy)

@@ -18,7 +18,7 @@ fun TextInputEditText.showFieldError(@StringRes errorMessageId: Int) {
 
 fun TextInputEditText.observeTextChanges(): Observable<String> = textChanges()
     .doOnNext { (parent.parent as? TextInputLayout?)?.isErrorEnabled = false }
-    .debounce(250, TimeUnit.MILLISECONDS)
+    .debounce(500, TimeUnit.MILLISECONDS)
     .map { it.toString() }
 
 fun TextInputLayout.disableErrorIfShown() {

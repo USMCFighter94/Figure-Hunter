@@ -2,7 +2,9 @@ package dev.brevitz.figurehunter.authentication.ui.login
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyModelWithView
 import com.google.android.material.button.MaterialButton
 import com.squareup.phrase.Phrase
@@ -31,6 +33,7 @@ data class LoginView(private val goToRegister: () -> Unit) : EpoxyModelWithView<
     private var emailView: ValidatedEmailView? = null
     private var passwordView: ValidatedPasswordView? = null
     private var submitButton: MaterialButton? = null
+    private var loadingView: ProgressBar? = null
 
     override fun bind(view: LinearLayout) {
         super.bind(view)
@@ -38,6 +41,7 @@ data class LoginView(private val goToRegister: () -> Unit) : EpoxyModelWithView<
             emailView = view.findViewById(R.id.loginEmailView)
             passwordView = view.findViewById(R.id.loginPasswordView)
             submitButton = view.findViewById(R.id.loginSubmitButton)
+            loadingView = view.findViewById(R.id.loginLoadingView)
 
             submitButton?.setOnClickListener {
                 viewModel.login(emailView!!.getEmail(), loginPasswordView!!.getPassword())
@@ -47,6 +51,8 @@ data class LoginView(private val goToRegister: () -> Unit) : EpoxyModelWithView<
         }
 
         viewModel.observe()
+            .distinctUntilChanged()
+            .doOnNext { loadingView?.isVisible = it.isLoading() }
             .subscribe {
                 when (it) {
                     is RemoteData.Success -> {
