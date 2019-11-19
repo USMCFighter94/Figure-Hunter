@@ -15,8 +15,3 @@ allprojects {
         maven { setUrl("https://dl.bintray.com/kotlin/exposed") }
     }
 }
-
-tasks.register("stage") {
-    dependsOn("build", "clean")
-    tasks.findByName("build")?.mustRunAfter(tasks.findByName("clean"))
-}

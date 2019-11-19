@@ -13,6 +13,10 @@ tasks.withType<KotlinCompile>().all {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+tasks.register("stage") {
+    dependsOn("installDist")
+}
+
 application {
     mainClassName = "dev.brevitz.figurehunter.ServerKt"
 }
