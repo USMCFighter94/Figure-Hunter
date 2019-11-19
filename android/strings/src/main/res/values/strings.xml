@@ -15,4 +15,8 @@
     <string name="invalid_login_email">Please enter a username</string>
     <string name="invalid_login_password">Passwords must contain 8 or more characters, a number, and at least one each of a lowercase, uppercase, and special character</string>
 
+    <!-- Login Error Messages -->
+    <string name="login_failed_title">Login Error</string>
+    <string name="login_failed_message">There was an error logging you in.\n\n{error}\n\nPlease try again.</string>
+
 </resources>

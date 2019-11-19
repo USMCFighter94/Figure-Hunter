@@ -61,6 +61,7 @@ dependencies {
     implementation(Deps.epoxy)
     implementation(Deps.kotlin)
     implementation(Deps.material)
+    implementation(Deps.phrase)
     implementation(Deps.recyclerView)
     implementation(Deps.Rx.android)
     implementation(Deps.Rx.binding)

@@ -23,9 +23,9 @@ object Deps {
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
-    const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
-
     const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+    const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    const val phrase = "com.squareup.phrase:phrase:${Versions.phrase}"
 
     object Project {
         object Authentication {

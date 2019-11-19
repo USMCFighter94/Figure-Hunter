@@ -2,8 +2,10 @@ package dev.brevitz.figurehunter.authentication.ui.login
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import com.airbnb.epoxy.EpoxyModelWithView
 import com.google.android.material.button.MaterialButton
+import com.squareup.phrase.Phrase
 import dev.brevitz.figurehunter.authentication.ui.AuthenticationComponent
 import dev.brevitz.figurehunter.authentication.ui.DaggerAuthenticationComponent
 import dev.brevitz.figurehunter.authentication.ui.R
@@ -51,7 +53,20 @@ data class LoginView(private val goToRegister: () -> Unit) : EpoxyModelWithView<
 
                     }
 
-                    is RemoteData.Error -> Timber.e("Error logging in: %s", it.error)
+                    is RemoteData.Error -> {
+                        Timber.e("Error logging in: %s", it.error)
+
+                        val errorMessage = Phrase.from(view.context, R.string.login_failed_message)
+                            .put("error", it.error.getUserError())
+                            .format()
+
+                        AlertDialog.Builder(view.context)
+                            .setTitle(R.string.login_failed_title)
+                            .setMessage(errorMessage)
+                            .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+                            .create()
+                            .show()
+                    }
                 }
             }
             .addTo(disposables)

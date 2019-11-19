@@ -15,6 +15,7 @@ object Versions {
     const val glide = "4.10.0"
     const val moshi = "1.9.2"
     const val okhttp = "4.2.2"
+    const val phrase = "1.1.0"
     const val retrofit = "2.6.2"
     const val rxJava = "2.2.14"
     const val rxKotlin = "2.4.0"
