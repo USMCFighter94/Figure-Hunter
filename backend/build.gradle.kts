@@ -1,6 +1,7 @@
 plugins {
     base
     kotlin("jvm") version Versions.kotlin
+    id(Deps.dependencyUpdate) version Versions.dependencyUpdate
 }
 
 allprojects {
