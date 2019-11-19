@@ -1,83 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstNameInputLayout"
+    <dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+        android:id="@+id/registerFirstNameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        >
+        app:errorMessage="@string/invalid_first_name"
+        app:hint="@string/first_name"
+        />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/firstNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastNameInputLayout"
+    <dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+        android:id="@+id/registerLastNameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        >
+        app:errorMessage="@string/invalid_last_name"
+        app:hint="@string/last_name"
+        />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/lasttNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/last_name"
-            android:inputType="textPersonName"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
+    <dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+        android:id="@+id/registerEmailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        >
+        app:errorMessage="@string/invalid_login_email"
+        app:hint="@string/username"
+        />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordInputLayout"
+    <dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+        android:id="@+id/registerPasswordLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:errorMessage="@string/invalid_login_password"
+        app:hint="@string/password"
+        app:isPassword="true"
+        />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerSubmitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -92,6 +65,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="8dp"
         android:text="@string/already_have_account"
+        />
+
+    <ProgressBar
+        android:id="@+id/registerLoadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="4dp"
+        android:visibility="gone"
+        tools:visibility="visible"
         />
 
 </LinearLayout>

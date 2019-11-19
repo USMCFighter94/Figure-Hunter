@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
 
-    <dev.brevitz.figurehunter.authentication.ui.ValidatedEmailView
-        android:id="@+id/loginEmailView"
+    <dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+        android:id="@+id/loginEmailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:errorMessage="@string/invalid_login_email"
+        app:hint="@string/username"
         />
 
-    <dev.brevitz.figurehunter.authentication.ui.ValidatedPasswordView
-        android:id="@+id/loginPasswordView"
+    <dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+        android:id="@+id/loginPasswordLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:errorMessage="@string/invalid_login_password"
+        app:hint="@string/password"
+        app:isPassword="true"
         />
 
     <com.google.android.material.button.MaterialButton

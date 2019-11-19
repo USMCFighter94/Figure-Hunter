@@ -11,13 +11,13 @@ import com.squareup.phrase.Phrase
 import dev.brevitz.figurehunter.authentication.ui.AuthenticationComponent
 import dev.brevitz.figurehunter.authentication.ui.DaggerAuthenticationComponent
 import dev.brevitz.figurehunter.authentication.ui.R
-import dev.brevitz.figurehunter.authentication.ui.ValidatedEmailView
-import dev.brevitz.figurehunter.authentication.ui.ValidatedPasswordView
+import dev.brevitz.figurehunter.authentication.ui.ValidatedTextInputLayout
+import dev.brevitz.figurehunter.authentication.ui.validEmail
+import dev.brevitz.figurehunter.authentication.ui.validPassword
 import dev.brevitz.figurehunter.core.data.di.provideCoreComponent
 import dev.brevitz.figurehunter.core.domain.RemoteData
 import dev.brevitz.figurehunter.core.ui.inflateAs
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.view_login.view.*
@@ -28,27 +28,28 @@ data class LoginView(private val goToRegister: () -> Unit) : EpoxyModelWithView<
     @Inject
     internal lateinit var viewModel: LoginViewModel
 
-    private val disposables = CompositeDisposable()
-
-    private var emailView: ValidatedEmailView? = null
-    private var passwordView: ValidatedPasswordView? = null
+    private var emailLayout: ValidatedTextInputLayout? = null
+    private var passwordLayout: ValidatedTextInputLayout? = null
     private var submitButton: MaterialButton? = null
     private var loadingView: ProgressBar? = null
 
     override fun bind(view: LinearLayout) {
         super.bind(view)
         with(view) {
-            emailView = view.findViewById(R.id.loginEmailView)
-            passwordView = view.findViewById(R.id.loginPasswordView)
-            submitButton = view.findViewById(R.id.loginSubmitButton)
-            loadingView = view.findViewById(R.id.loginLoadingView)
+            emailLayout = findViewById(R.id.loginEmailLayout)
+            passwordLayout = findViewById(R.id.loginPasswordLayout)
+            submitButton = findViewById(R.id.loginSubmitButton)
+            loadingView = findViewById(R.id.loginLoadingView)
 
             submitButton?.setOnClickListener {
-                viewModel.login(emailView!!.getEmail(), loginPasswordView!!.getPassword())
+                viewModel.login(emailLayout!!.getData(), passwordLayout!!.getData())
             }
 
             newHere.setOnClickListener { goToRegister() }
         }
+
+        emailLayout?.setValidation { validEmail(it) }
+        passwordLayout?.setValidation { validPassword(it) }
 
         viewModel.observe()
             .distinctUntilChanged()
@@ -75,24 +76,24 @@ data class LoginView(private val goToRegister: () -> Unit) : EpoxyModelWithView<
                     }
                 }
             }
-            .addTo(disposables)
+            .addTo(viewModel.disposables)
 
-        if (emailView != null && passwordView != null) {
+        if (emailLayout != null && passwordLayout != null) {
             Observables.combineLatest(
-                emailView!!.validEmailObservable,
-                passwordView!!.validPasswordObservable
+                emailLayout!!.validDataObservable,
+                passwordLayout!!.validDataObservable
             ) { email, password -> email && password }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { validFields -> submitButton?.isEnabled = validFields }
-                .addTo(disposables)
+                .addTo(viewModel.disposables)
         }
     }
 
     override fun unbind(view: LinearLayout) {
         super.unbind(view)
-        disposables.clear()
-        emailView?.disposables?.clear()
-        passwordView?.disposables?.clear()
+        viewModel.stop()
+        emailLayout?.stop()
+        passwordLayout?.stop()
     }
 
     override fun buildView(parent: ViewGroup): LinearLayout {

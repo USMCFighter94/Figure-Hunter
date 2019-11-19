@@ -11,6 +11,8 @@
     <string name="new_here">New Here? Register</string>
     <string name="already_have_account">Already have an account? Log in</string>
 
+    <string name="generic_validation_error">Validation error.</string>
+
     <!-- Login Validation Error Messages -->
     <string name="invalid_login_email">Please enter a username</string>
     <string name="invalid_login_password">Passwords must contain 8 or more characters, a number, and at least one each of a lowercase, uppercase, and special character</string>
@@ -18,5 +20,13 @@
     <!-- Login Error Messages -->
     <string name="login_failed_title">Login Error</string>
     <string name="login_failed_message">There was an error logging you in.\n\n{error}\n\nPlease try again.</string>
+
+    <!-- Register Validation Error Messages -->
+    <string name="invalid_first_name">Please enter a first name</string>
+    <string name="invalid_last_name">Please enter a last name</string>
+
+    <!-- Register Error Messages -->
+    <string name="register_failed_title">Register Error</string>
+    <string name="register_failed_message">There was an error registering you.\n\n{error}\n\nPlease try again.</string>
 
 </resources>
