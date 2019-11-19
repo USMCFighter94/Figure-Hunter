@@ -1,3 +1,7 @@
+plugins {
+    id(Plugins.dependencyUpdate) version Versions.dependencyUpdate
+}
+
 buildscript {
     repositories {
         google()

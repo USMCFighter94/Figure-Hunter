@@ -1,6 +1,7 @@
 object Plugins {
     const val androidGradle = "com.android.tools.build:gradle:${Versions.androidGradle}"
     const val app = "com.android.application"
+    const val dependencyUpdate = "com.github.ben-manes.versions"
     const val library = "com.android.library"
 
     object Kotlin {
