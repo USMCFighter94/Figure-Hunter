@@ -1,4 +1,4 @@
-package dev.brevitz.figurehunter.authentication.ui
+package dev.brevitz.figurehunter.authentication.ui.login
 
 import dev.brevitz.figurehunter.authentication.domain.AuthenticationRepository
 import dev.brevitz.figurehunter.authentication.domain.LoginData
@@ -11,7 +11,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(
+internal class LoginViewModel @Inject constructor(
     private val repository: AuthenticationRepository
 ) : ViewModel<RemoteData<Token, RemoteError>>(RemoteData.NotAsked) {
     fun login(email: String, password: String) {

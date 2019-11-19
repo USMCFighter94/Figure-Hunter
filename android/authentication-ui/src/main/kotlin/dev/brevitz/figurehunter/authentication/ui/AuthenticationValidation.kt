@@ -4,7 +4,6 @@ import java.util.regex.Pattern
 
 private val PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=*])(?=\\S+$).{4,}$")
 
-
 fun validEmail(email: String?) = !email.isNullOrBlank()
 
 /**

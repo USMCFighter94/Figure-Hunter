@@ -6,14 +6,15 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.fragment_authentication.*
 
-class AuthenticationFragment : Fragment(R.layout.fragment_authentication),
-    AuthenticationClickListener {
+class AuthenticationFragment : Fragment(R.layout.fragment_authentication), AuthenticationClickListener {
     private val controller = AuthenticationController(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         authenticationViewPager.adapter = controller.adapter
         authenticationViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        controller.requestModelBuild()
     }
 
     override fun goToLogin() {

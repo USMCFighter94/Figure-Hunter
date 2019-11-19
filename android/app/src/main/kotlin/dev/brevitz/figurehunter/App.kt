@@ -11,7 +11,7 @@ class App : Application(), CoreComponentProvider {
 
     override fun onCreate() {
         super.onCreate()
-        Timber.plant(CrashReportingTree())
+        Timber.plant(if (BuildConfig.DEBUG) Timber.DebugTree() else CrashReportingTree())
     }
 
     override fun coreComponent(): CoreComponent = coreComponent

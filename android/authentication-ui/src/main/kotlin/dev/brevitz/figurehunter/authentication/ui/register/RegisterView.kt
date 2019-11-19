@@ -1,8 +1,9 @@
-package dev.brevitz.figurehunter.authentication.ui
+package dev.brevitz.figurehunter.authentication.ui.register
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.airbnb.epoxy.EpoxyModelWithView
+import dev.brevitz.figurehunter.authentication.ui.R
 import dev.brevitz.figurehunter.core.ui.inflateAs
 import kotlinx.android.synthetic.main.view_register.view.*
 

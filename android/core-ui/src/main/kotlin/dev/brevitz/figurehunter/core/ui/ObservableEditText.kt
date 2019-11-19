@@ -8,19 +8,19 @@ import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
 fun TextInputEditText.showFieldError(@StringRes errorMessageId: Int) {
-    (this.parent.parent as TextInputLayout?)?.apply {
+    (parent.parent as? TextInputLayout?)?.apply {
         isErrorEnabled = true
         error = context.getString(errorMessageId)
     }
 
-    this.requestFocus()
+    requestFocus()
 }
 
 fun TextInputEditText.observeTextChanges(): Observable<String> = textChanges()
-    .doOnNext { (this.parent.parent as TextInputLayout?)?.isErrorEnabled = false }
+    .doOnNext { (parent.parent as? TextInputLayout?)?.isErrorEnabled = false }
     .debounce(250, TimeUnit.MILLISECONDS)
     .map { it.toString() }
 
 fun TextInputLayout.disableErrorIfShown() {
-    if (this.isErrorEnabled) this.isErrorEnabled = false
+    if (isErrorEnabled) isErrorEnabled = false
 }
