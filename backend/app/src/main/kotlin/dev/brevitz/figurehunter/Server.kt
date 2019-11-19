@@ -11,11 +11,11 @@ import dev.brevitz.figurehunter.figure.data.db.FigureLocalDataSource
 import dev.brevitz.figurehunter.figure.data.figure
 import dev.brevitz.figurehunter.home.home
 import dev.brevitz.figurehunter.user.data.UserRepository
+import dev.brevitz.figurehunter.user.data.db.UserDataSource
 import dev.brevitz.figurehunter.user.data.user
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
-import io.ktor.auth.Principal
 import io.ktor.auth.jwt.jwt
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
@@ -68,11 +68,12 @@ fun Application.main() {
     )
 
     val figureDataSource = FigureDataSource(db)
+    val userDataSource = UserDataSource(db)
 
     routing {
         home()
         figure(FigureRepository(figureLocalDataSource, figureDataSource))
-        user(UserRepository)
+        user(UserRepository(userDataSource))
         login(authenticationRepository)
         register(authenticationRepository)
     }
