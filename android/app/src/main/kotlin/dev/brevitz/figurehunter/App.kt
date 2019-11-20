@@ -7,10 +7,11 @@ import dev.brevitz.figurehunter.core.data.di.DaggerCoreComponent
 import timber.log.Timber
 
 class App : Application(), CoreComponentProvider {
-    private val coreComponent = DaggerCoreComponent.create()
+    private lateinit var coreComponent: CoreComponent
 
     override fun onCreate() {
         super.onCreate()
+        coreComponent = DaggerCoreComponent.factory().create(this)
         Timber.plant(if (BuildConfig.DEBUG) Timber.DebugTree() else CrashReportingTree())
     }
 

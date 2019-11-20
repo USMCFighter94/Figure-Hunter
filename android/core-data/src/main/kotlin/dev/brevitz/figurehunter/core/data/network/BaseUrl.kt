@@ -1,4 +1,4 @@
-package dev.brevitz.figurehunter.core.data.di
+package dev.brevitz.figurehunter.core.data.network
 
 import javax.inject.Qualifier
 
