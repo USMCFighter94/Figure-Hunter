@@ -3,6 +3,7 @@ package dev.brevitz.figurehunter.authentication.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.fragment_authentication.*
 
@@ -23,5 +24,9 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication), Authe
 
     override fun goToRegister() {
         authenticationViewPager.currentItem = 1
+    }
+
+    override fun finished() {
+        findNavController().popBackStack()
     }
 }

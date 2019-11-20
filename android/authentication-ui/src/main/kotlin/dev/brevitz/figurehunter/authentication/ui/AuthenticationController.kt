@@ -6,11 +6,11 @@ import dev.brevitz.figurehunter.authentication.ui.register.RegisterView
 
 class AuthenticationController(private val clickListener: AuthenticationClickListener) : EpoxyController() {
     override fun buildModels() {
-        LoginView { clickListener.goToRegister() }
+        LoginView({ clickListener.goToRegister() }, { clickListener.finished() })
             .id(LoginView.ID)
             .addTo(this)
 
-        RegisterView { clickListener.goToLogin() }
+        RegisterView({ clickListener.goToLogin() }, { clickListener.finished() })
             .id(RegisterView.ID)
             .addTo(this)
     }

@@ -1,11 +1,10 @@
 package dev.brevitz.figurehunter.authentication.ui.register
 
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import com.airbnb.epoxy.EpoxyModelWithView
+import com.airbnb.epoxy.EpoxyModel
 import com.google.android.material.button.MaterialButton
 import com.squareup.phrase.Phrase
 import dev.brevitz.figurehunter.authentication.ui.AuthenticationComponent
@@ -16,7 +15,6 @@ import dev.brevitz.figurehunter.authentication.ui.validEmail
 import dev.brevitz.figurehunter.authentication.ui.validPassword
 import dev.brevitz.figurehunter.core.data.di.provideCoreComponent
 import dev.brevitz.figurehunter.core.domain.RemoteData
-import dev.brevitz.figurehunter.core.ui.inflateAs
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.addTo
@@ -24,7 +22,7 @@ import kotlinx.android.synthetic.main.view_register.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
-data class RegisterView(private val goToLogin: () -> Unit) : EpoxyModelWithView<LinearLayout>() {
+data class RegisterView(private val goToLogin: () -> Unit, private val finished: () -> Unit) : EpoxyModel<LinearLayout>() {
 
     @Inject
     internal lateinit var viewModel: RegisterViewModel
@@ -38,6 +36,16 @@ data class RegisterView(private val goToLogin: () -> Unit) : EpoxyModelWithView<
 
     override fun bind(view: LinearLayout) {
         super.bind(view)
+        if (!::viewModel.isInitialized) {
+            view.context.provideCoreComponent().let {
+                it.componentManager().getOrCreate(AuthenticationComponent.KEY) {
+                    DaggerAuthenticationComponent.builder()
+                        .coreComponent(it)
+                        .build()
+                }.inject(this)
+            }
+        }
+
         with(view) {
             firstNameLayout = findViewById(R.id.registerFirstNameLayout)
             lastNameLayout = findViewById(R.id.registerFirstNameLayout)
@@ -47,15 +55,6 @@ data class RegisterView(private val goToLogin: () -> Unit) : EpoxyModelWithView<
             loadingView = findViewById(R.id.registerLoadingView)
 
             alreadyHaveAccount.setOnClickListener { goToLogin() }
-
-            submitButton?.setOnClickListener {
-                viewModel.register(
-                    firstNameLayout!!.getData(),
-                    lastNameLayout!!.getData(),
-                    emailLayout!!.getData(),
-                    passwordLayout!!.getData()
-                )
-            }
         }
 
         firstNameLayout?.setValidation { it.isNotBlank() }
@@ -63,15 +62,21 @@ data class RegisterView(private val goToLogin: () -> Unit) : EpoxyModelWithView<
         emailLayout?.setValidation { validEmail(it) }
         passwordLayout?.setValidation { validPassword(it) }
 
+        submitButton?.setOnClickListener {
+            viewModel.register(
+                firstNameLayout!!.getData(),
+                lastNameLayout!!.getData(),
+                emailLayout!!.getData(),
+                passwordLayout!!.getData()
+            )
+        }
+
         viewModel.observe()
             .distinctUntilChanged()
             .doOnNext { loadingView?.isVisible = it.isLoading() }
             .subscribe {
                 when (it) {
-                    is RemoteData.Success -> {
-
-                    }
-
+                    is RemoteData.Success -> finished()
                     is RemoteData.Error -> {
                         Timber.e("Error registering: %s", it.error)
 
@@ -103,17 +108,7 @@ data class RegisterView(private val goToLogin: () -> Unit) : EpoxyModelWithView<
         }
     }
 
-    override fun buildView(parent: ViewGroup): LinearLayout {
-        parent.context.provideCoreComponent().let {
-            it.componentManager().getOrCreate(AuthenticationComponent.KEY) {
-                DaggerAuthenticationComponent.builder()
-                    .coreComponent(it)
-                    .build()
-            }.inject(this)
-        }
-
-        return parent.inflateAs(R.layout.view_register)
-    }
+    override fun getDefaultLayout() = R.layout.view_register
 
     companion object {
         const val ID = "RegisterView"

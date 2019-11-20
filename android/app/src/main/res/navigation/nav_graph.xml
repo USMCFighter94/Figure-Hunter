@@ -31,6 +31,30 @@
             android:autoVerify="true"
             app:uri="https://figurehunter.com/account"
             />
+
+        <action
+            android:id="@+id/authenticateUser"
+            app:destination="@id/authentication"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/authentication"
+        android:name="dev.brevitz.figurehunter.authentication.ui.AuthenticationFragment"
+        android:label="@string/title_authentication"
+        tools:layout="@layout/fragment_authentication"
+        >
+        <deepLink
+            android:id="@+id/loginDeepLink"
+            android:autoVerify="true"
+            app:uri="https://figurehunter.com/login"
+            />
+
+        <deepLink
+            android:id="@+id/registerDeepLink"
+            android:autoVerify="true"
+            app:uri="https://figurehunter.com/register"
+            />
     </fragment>
 
 </navigation>
