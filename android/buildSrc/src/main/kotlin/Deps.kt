@@ -4,6 +4,7 @@ object Deps {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val lifecycleJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val navigation = "android.arch.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUi = "android.arch.navigation:navigation-ui-ktx:${Versions.navigation}"

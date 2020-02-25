@@ -2,6 +2,7 @@ package dev.brevitz.figurehunter.authentication.ui.register
 
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyModel
@@ -18,7 +19,6 @@ import dev.brevitz.figurehunter.core.domain.RemoteData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.view_register.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -54,7 +54,7 @@ data class RegisterView(private val goToLogin: () -> Unit, private val finished:
             submitButton = findViewById(R.id.registerSubmitButton)
             loadingView = findViewById(R.id.registerLoadingView)
 
-            alreadyHaveAccount.setOnClickListener { goToLogin() }
+            findViewById<TextView>(R.id.alreadyHaveAccount).setOnClickListener { goToLogin() }
         }
 
         firstNameLayout?.setValidation { it.isNotBlank() }

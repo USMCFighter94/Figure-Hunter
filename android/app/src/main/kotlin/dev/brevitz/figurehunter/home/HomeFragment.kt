@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.brevitz.figurehunter.core.data.di.provideCoreComponent
 import dev.brevitz.figurehunter.core.domain.RemoteData
 import dev.brevitz.figurehunter.R
+import dev.brevitz.figurehunter.databinding.FragmentHomeBinding
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -19,6 +19,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var viewModel: HomeViewModel
 
     private val controller = HomeController()
+
+    private var binding: FragmentHomeBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeRecyclerView.apply {
+        binding = FragmentHomeBinding.bind(view)
+
+        binding?.homeRecyclerView?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = controller.adapter
             isNestedScrollingEnabled = true
@@ -46,7 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onResume()
         viewModel.observe()
             .distinctUntilChanged()
-            .doOnNext { homeLoadingIndicator.isVisible = it.isLoading() }
+            .doOnNext { binding?.homeLoadingIndicator?.isVisible = it.isLoading() }
             .subscribe {
                 when (it) {
                     is RemoteData.Success -> controller.setData(it.data)
@@ -58,5 +62,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onPause() {
         super.onPause()
         viewModel.stop()
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 }

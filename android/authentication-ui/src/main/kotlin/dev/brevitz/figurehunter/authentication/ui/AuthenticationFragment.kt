@@ -5,28 +5,37 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.android.synthetic.main.fragment_authentication.*
+import dev.brevitz.figurehunter.authentication.ui.databinding.FragmentAuthenticationBinding
 
 class AuthenticationFragment : Fragment(R.layout.fragment_authentication), AuthenticationClickListener {
     private val controller = AuthenticationController(this)
 
+    private var binding: FragmentAuthenticationBinding? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        authenticationViewPager.adapter = controller.adapter
-        authenticationViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding = FragmentAuthenticationBinding.bind(view)
+
+        binding?.authenticationViewPager?.adapter = controller.adapter
+        binding?.authenticationViewPager?.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         controller.requestModelBuild()
     }
 
     override fun goToLogin() {
-        authenticationViewPager.currentItem = 0
+        binding?.authenticationViewPager?.currentItem = 0
     }
 
     override fun goToRegister() {
-        authenticationViewPager.currentItem = 1
+        binding?.authenticationViewPager?.currentItem = 1
     }
 
     override fun finished() {
         findNavController().popBackStack()
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 }

@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id(Plugins.app)
     kotlin(Plugins.Kotlin.android)
-    kotlin(Plugins.Kotlin.extensions)
     kotlin(Plugins.Kotlin.kapt)
 }
 
@@ -48,6 +47,10 @@ android {
             resources.srcDirs("src/test/resources")
         }
         getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
+    }
+
+    viewBinding {
+        isEnabled = true
     }
 }
 

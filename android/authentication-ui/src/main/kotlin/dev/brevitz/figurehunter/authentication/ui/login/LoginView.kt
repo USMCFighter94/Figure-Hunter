@@ -2,6 +2,7 @@ package dev.brevitz.figurehunter.authentication.ui.login
 
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyModel
@@ -18,7 +19,6 @@ import dev.brevitz.figurehunter.core.domain.RemoteData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.view_login.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -54,7 +54,7 @@ data class LoginView(private val goToRegister: () -> Unit, private val finished:
                 viewModel.login(emailLayout!!.getData(), passwordLayout!!.getData())
             }
 
-            newHere.setOnClickListener { goToRegister() }
+            findViewById<TextView>(R.id.newHere).setOnClickListener { goToRegister() }
         }
 
         emailLayout?.setValidation { validEmail(it) }

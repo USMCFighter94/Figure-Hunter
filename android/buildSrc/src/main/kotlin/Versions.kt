@@ -32,6 +32,6 @@ object Versions {
     const val espresso = "3.3.0-alpha02"
     const val androidXJUnit = "1.1.1"
 
-    const val androidGradle = "3.5.2"
+    const val androidGradle = "3.6.0"
     const val dependencyUpdate = "0.27.0"
 }

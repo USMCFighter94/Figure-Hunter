@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id(Plugins.library)
     kotlin(Plugins.Kotlin.android)
-    kotlin(Plugins.Kotlin.extensions)
 }
 
 android {
