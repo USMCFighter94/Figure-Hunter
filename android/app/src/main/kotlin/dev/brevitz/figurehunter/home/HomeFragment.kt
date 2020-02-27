@@ -25,10 +25,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context?.provideCoreComponent()?.let {
-            DaggerHomeComponent.builder()
-                .coreComponent(it)
-                .build()
-                .inject(this)
+            it.componentManager().getOrCreate(HomeComponent.KEY) {
+                DaggerHomeComponent.builder()
+                    .coreComponent(it)
+                    .build()
+            }.inject(this)
         }
     }
 

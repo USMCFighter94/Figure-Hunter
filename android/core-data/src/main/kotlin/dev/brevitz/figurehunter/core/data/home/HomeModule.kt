@@ -11,16 +11,13 @@ import dev.brevitz.figurehunter.core.domain.home.HomeRepository
 object HomeModule {
     @Provides
     @FeatureScope
-    fun homeApi(serviceCreator: ServiceCreator): HomeApi = serviceCreator.create(
-        HomeApi::class.java)
+    fun homeApi(serviceCreator: ServiceCreator): HomeApi = serviceCreator.create(HomeApi::class.java)
 
     @Provides
     @FeatureScope
-    fun homeStore(): HomeStore =
-        MemoryReactiveStore { HomeStoreKey }
+    fun homeStore(): HomeStore = MemoryReactiveStore { HomeStoreKey }
 
     @Provides
     @FeatureScope
-    fun homeRepository(store: HomeStore, api: HomeApi): HomeRepository =
-        HomeDataRepository(store, api)
+    fun homeRepository(store: HomeStore, api: HomeApi): HomeRepository = HomeDataRepository(store, api)
 }

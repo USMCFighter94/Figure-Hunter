@@ -10,4 +10,8 @@ import dev.brevitz.figurehunter.core.data.home.HomeModule
 @Component(dependencies = [CoreComponent::class], modules = [HomeModule::class])
 interface HomeComponent : DaggerComponent {
     fun inject(fragment: HomeFragment)
+
+    companion object {
+        const val KEY = "HomeComponent"
+    }
 }
