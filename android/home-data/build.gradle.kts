@@ -50,9 +50,11 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    implementation(project(Modules.Authentication.domain))
-    api(project(Modules.Core.data))
+    implementation(project(Modules.Core.data))
+    implementation(project(Modules.Core.domain))
+    implementation(project(Modules.Home.domain))
 
+    implementation(Deps.coreKtx)
     kapt(Deps.Dagger.compiler)
     implementation(Deps.Dagger.core)
     implementation(Deps.kotlin)

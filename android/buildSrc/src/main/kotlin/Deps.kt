@@ -28,20 +28,6 @@ object Deps {
     const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val phrase = "com.squareup.phrase:phrase:${Versions.phrase}"
 
-    object Project {
-        object Authentication {
-            const val data = ":authentication-data"
-            const val domain = ":authentication-domain"
-            const val ui = ":authentication-ui"
-        }
-        object Core {
-            const val data = ":core-data"
-            const val domain = ":core-domain"
-            const val ui = ":core-ui"
-        }
-        const val strings = ":strings"
-    }
-
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val converter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"

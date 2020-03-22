@@ -14,7 +14,7 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    api(project(Modules.Core.domain))
+    implementation(project(Modules.Core.domain))
     implementation(Deps.kotlin)
     implementation(Deps.Rx.java)
 

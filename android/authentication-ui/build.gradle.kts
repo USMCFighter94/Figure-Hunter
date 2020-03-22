@@ -53,10 +53,10 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    implementation(project(Deps.Project.Authentication.data))
-    implementation(project(Deps.Project.Authentication.domain))
-    implementation(project(Deps.Project.Core.ui))
-    implementation(project(Deps.Project.strings))
+    implementation(project(Modules.Authentication.data))
+    implementation(project(Modules.Authentication.domain))
+    implementation(project(Modules.Core.ui))
+    implementation(project(Modules.strings))
 
     implementation(Deps.appCompat)
     implementation(Deps.coreKtx)

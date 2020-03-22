@@ -1,10 +1,13 @@
 include(
     ":app",
-    Deps.Project.Authentication.data,
-    Deps.Project.Authentication.domain,
-    Deps.Project.Authentication.ui,
-    Deps.Project.Core.data,
-    Deps.Project.Core.domain,
-    Deps.Project.Core.ui,
-    Deps.Project.strings
+    Modules.Authentication.data,
+    Modules.Authentication.domain,
+    Modules.Authentication.ui,
+    Modules.Core.data,
+    Modules.Core.domain,
+    Modules.Core.ui,
+    Modules.Home.data,
+    Modules.Home.domain,
+    Modules.Home.ui,
+    Modules.strings
 )

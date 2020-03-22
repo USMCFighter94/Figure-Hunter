@@ -59,11 +59,12 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    implementation(project(Deps.Project.Authentication.ui))
-    implementation(project(Deps.Project.Core.data))
-    implementation(project(Deps.Project.Core.domain))
-    implementation(project(Deps.Project.Core.ui))
-    implementation(project(Deps.Project.strings))
+    implementation(project(Modules.Authentication.ui))
+    implementation(project(Modules.Core.data))
+    implementation(project(Modules.Core.domain))
+    implementation(project(Modules.Core.ui))
+    implementation(project(Modules.Home.ui))
+    implementation(project(Modules.strings))
 
     implementation(Deps.appCompat)
     implementation(Deps.cardView)
