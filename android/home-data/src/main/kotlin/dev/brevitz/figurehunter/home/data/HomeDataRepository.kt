@@ -6,12 +6,13 @@ import dev.brevitz.figurehunter.core.data.syncIfEmpty
 import dev.brevitz.figurehunter.core.domain.ObservableRemoteData
 import dev.brevitz.figurehunter.core.domain.RemoteData
 import dev.brevitz.figurehunter.core.domain.RemoteError
+import dev.brevitz.figurehunter.core.domain.toMaybeError
 import dev.brevitz.figurehunter.home.domain.Figure
 import dev.brevitz.figurehunter.home.domain.HomeRepository
-import dev.brevitz.figurehunter.core.domain.toMaybeError
 import io.reactivex.Maybe
+import javax.inject.Inject
 
-class HomeDataRepository(private val store: HomeStore, private val api: HomeApi) : HomeRepository {
+class HomeDataRepository @Inject constructor(private val store: HomeStore, private val api: HomeApi) : HomeRepository {
     override fun getFigures(): ObservableRemoteData<List<Figure>> =
         store.get(HomeStoreKey)
             .syncIfEmpty(fetchFigures())

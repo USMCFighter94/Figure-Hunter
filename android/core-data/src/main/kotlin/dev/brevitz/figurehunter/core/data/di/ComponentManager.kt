@@ -1,6 +1,10 @@
 package dev.brevitz.figurehunter.core.data.di
 
-class ComponentManager {
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class ComponentManager @Inject constructor() {
     private var components: Map<String, DaggerComponent> = emptyMap()
 
     inline fun <A : DaggerComponent> getOrCreate(key: String, initializer: () -> A): A {
@@ -11,7 +15,7 @@ class ComponentManager {
         components = components.plus(key to component)
     }
 
-    fun <A : DaggerComponent> getComponent(key: String): A? = components[key] as? A?
+    fun <A : DaggerComponent> getComponent(key: String): A? = components[key] as? A
 
     fun destroyComponent(key: String) {
         var component = components[key]

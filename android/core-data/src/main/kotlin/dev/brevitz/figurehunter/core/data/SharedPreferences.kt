@@ -9,8 +9,9 @@ import dev.brevitz.figurehunter.core.domain.toOption
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import javax.inject.Inject
 
-class SharedPreferences(context: Context) : Storage {
+class SharedPreferences @Inject constructor(context: Context) : Storage {
     private val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     private val stringSubjects = mutableMapOf<StorageKey, Subject<Option<String>>>()
@@ -27,7 +28,7 @@ class SharedPreferences(context: Context) : Storage {
     }
 
     private fun getOrCreateStringPublisher(key: StorageKey): Subject<Option<String>> =
-        stringSubjects.getOrPut(key) { PublishSubject.create<Option<String>>() }
+        stringSubjects.getOrPut(key) { PublishSubject.create() }
 
     private companion object {
         private const val PREF_NAME = "FigureHunter"

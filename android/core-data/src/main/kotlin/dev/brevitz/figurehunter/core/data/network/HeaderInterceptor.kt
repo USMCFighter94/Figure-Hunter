@@ -8,8 +8,11 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class HeaderInterceptor(storage: Storage) : Interceptor {
+@Singleton
+class HeaderInterceptor @Inject constructor(storage: Storage) : Interceptor {
     private val disposables = CompositeDisposable()
     private var token: String? = null
 

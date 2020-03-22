@@ -1,10 +1,10 @@
-package dev.brevitz.figurehunter.core.data.di
+package dev.brevitz.figurehunter.core.data.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
-import dev.brevitz.figurehunter.core.data.network.BaseUrl
+import dev.brevitz.figurehunter.core.data.di.ServiceCreator
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Converter
