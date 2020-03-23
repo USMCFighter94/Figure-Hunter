@@ -9,13 +9,13 @@ import io.kotlintest.specs.FunSpec
 import io.mockk.every
 import io.mockk.mockk
 
-class FigureRepositoryTest : FunSpec() {
+class FigureDataRepositoryTest : FunSpec() {
     private val mockLocalDataSource = mockk<FigureLocalDataSource>()
     private val mockDataSource = mockk<FigureDataSource>()
     private val figureGenerator = FigureGenerator(
 
     )
-    private val repository = FigureRepository(mockLocalDataSource, mockDataSource)
+    private val repository = FigureDataRepository(mockLocalDataSource, mockDataSource)
 
     init {
         context("Empty Local Data Source Should Read from Main Data Source") {

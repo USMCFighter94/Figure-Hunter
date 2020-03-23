@@ -8,10 +8,10 @@ import io.kotlintest.specs.FunSpec
 import io.mockk.every
 import io.mockk.mockk
 
-class UserRepositoryTest : FunSpec() {
+class UserDataRepositoryTest : FunSpec() {
     private val mockDataSource = mockk<UserDataSource>()
     private val userGenerator = UserGenerator()
-    private val repository = UserRepository(mockDataSource)
+    private val repository = UserDataRepository(mockDataSource)
 
     init {
         context("Main Data Source") {

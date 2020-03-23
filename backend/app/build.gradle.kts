@@ -37,6 +37,4 @@ dependencies {
     compile(Deps.Ktor.gson)
     compile(Deps.logback)
     compile(Deps.postgresql)
-
-    testCompile(group = "junit", name = "junit", version = "4.12")
 }

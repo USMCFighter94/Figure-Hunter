@@ -5,12 +5,12 @@ import dev.brevitz.figurehunter.auth.data.UserAuthenticationRepository
 import dev.brevitz.figurehunter.auth.data.login.login
 import dev.brevitz.figurehunter.auth.data.register.register
 import dev.brevitz.figurehunter.core.LOG
-import dev.brevitz.figurehunter.figure.data.FigureRepository
+import dev.brevitz.figurehunter.figure.data.FigureDataRepository
 import dev.brevitz.figurehunter.figure.data.db.FigureDataSource
 import dev.brevitz.figurehunter.figure.data.db.FigureLocalDataSource
 import dev.brevitz.figurehunter.figure.data.figure
 import dev.brevitz.figurehunter.home.home
-import dev.brevitz.figurehunter.user.data.UserRepository
+import dev.brevitz.figurehunter.user.data.UserDataRepository
 import dev.brevitz.figurehunter.user.data.db.UserDataSource
 import dev.brevitz.figurehunter.user.data.user
 import io.ktor.application.Application
@@ -57,9 +57,6 @@ fun Application.main() {
     }
 
     val cache = Database.connect("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;", driver = "org.h2.Driver")
-
-    val figureLocalDataSource = FigureLocalDataSource(cache)
-
     val db = Database.connect(
         System.getenv("JDBC_DATABASE_URL"),
         driver = "org.postgresql.Driver",
@@ -67,13 +64,14 @@ fun Application.main() {
         password = System.getenv("JDBC_DATABASE_PASSWORD")
     )
 
+    val figureLocalDataSource = FigureLocalDataSource(cache)
     val figureDataSource = FigureDataSource(db)
     val userDataSource = UserDataSource(db)
 
     routing {
         home()
-        figure(FigureRepository(figureLocalDataSource, figureDataSource))
-        user(UserRepository(userDataSource))
+        figure(FigureDataRepository(figureLocalDataSource, figureDataSource))
+        user(UserDataRepository(userDataSource))
         login(authenticationRepository)
         register(authenticationRepository)
     }
