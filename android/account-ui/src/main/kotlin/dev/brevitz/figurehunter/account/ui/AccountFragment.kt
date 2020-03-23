@@ -47,6 +47,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                             binding?.userImage?.load(it)
                         }
 
+                        binding?.username?.text = user.userName
                         binding?.firstName?.text = user.firstName
                         binding?.lastName?.text = user.lastName
                     }

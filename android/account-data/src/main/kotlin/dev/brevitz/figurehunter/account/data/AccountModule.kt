@@ -1,13 +1,19 @@
 package dev.brevitz.figurehunter.account.data
 
-import dagger.Binds
 import dagger.Module
-import dev.brevitz.figurehunter.account.domain.AccountRepository
+import dagger.Provides
+import dev.brevitz.figurehunter.account.data.api.AccountApi
 import dev.brevitz.figurehunter.core.data.FeatureScope
+import dev.brevitz.figurehunter.core.data.MemoryReactiveStore
+import dev.brevitz.figurehunter.core.data.di.ServiceCreator
 
 @Module
-interface AccountModule {
-    @Binds
+object AccountModule {
+    @Provides
     @FeatureScope
-    fun repository(dataRepository: AccountDataRepository): AccountRepository
+    fun accountStore(): AccountStore = MemoryReactiveStore { it.id }
+
+    @Provides
+    @FeatureScope
+    fun accountApi(serviceCreator: ServiceCreator): AccountApi = serviceCreator.create(AccountApi::class.java)
 }
