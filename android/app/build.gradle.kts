@@ -59,6 +59,7 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
+    implementation(project(Modules.Account.ui))
     implementation(project(Modules.Authentication.ui))
     implementation(project(Modules.Core.data))
     implementation(project(Modules.Core.domain))
@@ -67,24 +68,13 @@ dependencies {
     implementation(project(Modules.strings))
 
     implementation(Deps.appCompat)
-    implementation(Deps.cardView)
     implementation(Deps.constraintLayout)
     implementation(Deps.coreKtx)
     kapt(Deps.Dagger.compiler)
     implementation(Deps.Dagger.core)
-    implementation(Deps.epoxy)
-    implementation(Deps.Glide.core)
-    kapt(Deps.Glide.compiler)
     implementation(Deps.kotlin)
-    implementation(Deps.lifecycle)
-    implementation(Deps.material)
     implementation(Deps.navigation)
     implementation(Deps.navigationUi)
-    implementation(Deps.recyclerView)
-    implementation(Deps.Rx.android)
-    implementation(Deps.Rx.binding)
-    implementation(Deps.Rx.java)
-    implementation(Deps.Rx.kotlin)
     implementation(Deps.timber)
 
     testImplementation(Deps.Test.kotlinTest)

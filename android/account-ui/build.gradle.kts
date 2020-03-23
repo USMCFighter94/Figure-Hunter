@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id(Plugins.library)
     kotlin(Plugins.Kotlin.android)
+    kotlin(Plugins.Kotlin.extensions)
     kotlin(Plugins.Kotlin.kapt)
 }
 
@@ -42,6 +43,10 @@ android {
         }
         getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
     }
+
+    viewBinding {
+        isEnabled = true
+    }
 }
 
 tasks.withType<KotlinCompile>().all {
@@ -49,13 +54,26 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
+    implementation(project(Modules.Account.data))
+    implementation(project(Modules.Account.domain))
+    implementation(project(Modules.Core.data))
+    implementation(project(Modules.Core.domain))
+    implementation(project(Modules.Core.ui))
+    implementation(project(Modules.strings))
+
     implementation(Deps.appCompat)
-    implementation(Deps.Glide.core)
-    kapt(Deps.Glide.compiler)
+    implementation(Deps.constraintLayout)
+    implementation(Deps.coreKtx)
+    kapt(Deps.Dagger.compiler)
+    implementation(Deps.Dagger.core)
+    implementation(Deps.epoxy)
     implementation(Deps.kotlin)
     implementation(Deps.material)
+    implementation(Deps.recyclerView)
+    implementation(Deps.Rx.android)
     implementation(Deps.Rx.java)
-    implementation(Deps.Rx.binding)
+    implementation(Deps.Rx.kotlin)
+    implementation(Deps.timber)
 
     testImplementation(Deps.Test.kotlinTest)
     testImplementation(Deps.Test.mockk)

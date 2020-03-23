@@ -1,4 +1,10 @@
 object Modules {
+    object Account {
+        const val data = ":account-data"
+        const val domain = ":account-domain"
+        const val ui = ":account-ui"
+    }
+
     object Authentication {
         const val data = ":authentication-data"
         const val domain = ":authentication-domain"

@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/account"
-        android:name="dev.brevitz.figurehunter.account.AccountFragment"
+        android:name="dev.brevitz.figurehunter.account.ui.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account"
         >
@@ -30,11 +30,6 @@
             android:id="@+id/accountDeepLink"
             android:autoVerify="true"
             app:uri="https://figurehunter.com/account"
-            />
-
-        <action
-            android:id="@+id/authenticateUser"
-            app:destination="@id/authentication"
             />
     </fragment>
 
@@ -56,5 +51,4 @@
             app:uri="https://figurehunter.com/register"
             />
     </fragment>
-
 </navigation>

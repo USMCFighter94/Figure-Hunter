@@ -1,12 +1,13 @@
-package dev.brevitz.figurehunter.account
+package dev.brevitz.figurehunter.account.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import dev.brevitz.figurehunter.R
+import dev.brevitz.figurehunter.account.ui.databinding.FragmentAccountBinding
 import dev.brevitz.figurehunter.core.data.di.provideCoreComponent
-import dev.brevitz.figurehunter.databinding.FragmentAccountBinding
+import dev.brevitz.figurehunter.core.domain.RemoteData
+import dev.brevitz.figurehunter.core.ui.deepLink
+import dev.brevitz.figurehunter.core.ui.load
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
@@ -35,11 +36,29 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     override fun onResume() {
         super.onResume()
         viewModel.observe()
+            .map { it.userData }
+            .distinctUntilChanged()
+            .subscribe { remoteData ->
+                when (remoteData) {
+                    is RemoteData.Success -> {
+                        val user = remoteData.data
+
+                        user.avatar?.let {
+                            binding?.userImage?.load(it)
+                        }
+
+                        binding?.firstName?.text = user.firstName
+                        binding?.lastName?.text = user.lastName
+                    }
+                }
+            }.addTo(viewModel.disposables)
+
+        viewModel.observe()
             .map { it.loggedIn }
             .distinctUntilChanged()
             .subscribe { loggedIn ->
                 if (!loggedIn) {
-                    findNavController().navigate(R.id.authenticateUser)
+                    activity?.deepLink(AUTHENTICATION_LINK)
                 }
             }
             .addTo(viewModel.disposables)
@@ -55,5 +74,9 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    private companion object {
+        private const val AUTHENTICATION_LINK = "https://figurehunter.com/login"
     }
 }

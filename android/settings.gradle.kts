@@ -1,5 +1,8 @@
 include(
     ":app",
+    Modules.Account.data,
+    Modules.Account.domain,
+    Modules.Account.ui,
     Modules.Authentication.data,
     Modules.Authentication.domain,
     Modules.Authentication.ui,
